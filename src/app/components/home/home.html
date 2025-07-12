@@ -1,1 +1,28 @@
-<p>home works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <h2 class="text-center text-primary mb-4">🎯 Pitch-o-Scope</h2>
+      <p class="text-center text-muted">Enter your startup idea below</p>
+
+      <form (ngSubmit)="submitIdea()" #ideaForm="ngForm">
+        <div class="mb-3">
+          <label for="startupIdea" class="form-label">Startup Idea</label>
+          <textarea
+            id="startupIdea"
+            class="form-control"
+            [(ngModel)]="startupIdea"
+            name="startupIdea"
+            rows="5"
+            required
+            placeholder="e.g., An AI app that writes resumes">
+          </textarea>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-success px-4" [disabled]="!ideaForm.form.valid">
+            Generate Pitch Deck
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
