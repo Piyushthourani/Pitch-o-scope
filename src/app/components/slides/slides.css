@@ -2,3 +2,10 @@
   width: 3rem;
   height: 3rem;
 }
+
+@media print {
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

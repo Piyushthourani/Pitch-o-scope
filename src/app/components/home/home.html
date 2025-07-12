@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
-      <h2 class="text-center text-primary mb-4">🎯 Pitch-o-Scope</h2>
+      <h2 class="text-center text-primary mb-4 fs-3 fs-md-2">🎯 Pitch-o-Scope</h2>
       <p class="text-center text-muted">Enter your startup idea below</p>
 
       <form (ngSubmit)="submitIdea()" #ideaForm="ngForm">
@@ -14,13 +14,25 @@
             name="startupIdea"
             rows="5"
             required
-            placeholder="e.g., An AI app that writes resumes">
-          </textarea>
-        </div>
+            minlength="15"
+            maxlength="300"
+            #startupIdeaRef="ngModel"
+            placeholder="e.g., An AI app that writes resumes"
+            [class.is-invalid]="startupIdeaRef.invalid && startupIdeaRef.touched"
+          ></textarea>
+
+          <!-- 🔴 Validation Feedback -->
+          <div *ngIf="startupIdeaRef.invalid && startupIdeaRef.touched" class="text-danger mt-1">
+            <div *ngIf="startupIdeaRef.errors?.['required']">Idea is required.</div>
+            <div *ngIf="startupIdeaRef.errors?.['minlength']">Minimum 15 characters required.</div>
+            <div *ngIf="startupIdeaRef.errors?.['maxlength']">Maximum 300 characters allowed.</div>
+          </div>
+
         <div class="text-center">
           <button class="btn btn-success px-4" [disabled]="!ideaForm.form.valid">
-            Generate Pitch Deck
+            🚀 Generate Pitch Deck
           </button>
+        </div>
         </div>
       </form>
     </div>
