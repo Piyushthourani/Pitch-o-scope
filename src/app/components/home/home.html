@@ -101,7 +101,7 @@
 
             <div class="form-actions">
               <!-- Editing indicator -->
-              <div class="editing-indicator" *ngIf="startupIdea && startupIdea.length > 0">
+              <div class="editing-indicator" *ngIf="startupIdea && startupIdea.length > 0 && hasGeneratedSlides">
                 <span class="indicator-icon">✏️</span>
                 <span class="indicator-text">Editing your previous idea</span>
                 <button type="button" class="clear-btn" (click)="clearIdea()" title="Start fresh">
@@ -116,7 +116,7 @@
                 [disabled]="!ideaForm.form.valid"
               >
                 <span class="btn-icon">🚀</span>
-                <span class="btn-text">{{ startupIdea && startupIdea.length > 0 ? 'Update Pitch Deck' : 'Generate Professional Pitch Deck' }}</span>
+                <span class="btn-text">{{ hasGeneratedSlides ? 'Update Pitch Deck' : 'Generate Professional Pitch Deck' }}</span>
                 <span class="btn-loader" *ngIf="false">
                   <span class="spinner-dots"></span>
                 </span>
