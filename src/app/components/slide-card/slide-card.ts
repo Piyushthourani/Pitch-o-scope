@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class SlideCard {
   @Input() slide!: SlideInterface;
+  @Input() slideIndex: number = 0;
 }

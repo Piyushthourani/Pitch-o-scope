@@ -1,40 +1,172 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-      <h2 class="text-center text-primary mb-4 fs-3 fs-md-2">🎯 Pitch-o-Scope</h2>
-      <p class="text-center text-muted">Enter your startup idea below</p>
-
-      <form (ngSubmit)="submitIdea()" #ideaForm="ngForm">
-        <div class="mb-3">
-          <label for="startupIdea" class="form-label"></label>
-          <textarea
-            id="startupIdea"
-            class="form-control"
-            [(ngModel)]="startupIdea"
-            name="startupIdea"
-            rows="5"
-            required
-            minlength="15"
-            maxlength="300"
-            #startupIdeaRef="ngModel"
-            placeholder="e.g., An AI app that writes resumes"
-            [class.is-invalid]="startupIdeaRef.invalid && startupIdeaRef.touched"
-          ></textarea>
-
-          <!-- 🔴 Validation Feedback -->
-          <div *ngIf="startupIdeaRef.invalid && startupIdeaRef.touched" class="text-danger mt-1">
-            <div *ngIf="startupIdeaRef.errors?.['required']">Idea is required.</div>
-            <div *ngIf="startupIdeaRef.errors?.['minlength']">Minimum 15 characters required.</div>
-            <div *ngIf="startupIdeaRef.errors?.['maxlength']">Maximum 300 characters allowed.</div>
+<div class="hero-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="hero-content text-center mb-5">
+          <h1 class="text-hero floating-element" data-text="Pitch-o-Scope">
+            <span class="hero-icon">🎯</span>
+            Pitch-o-Scope
+          </h1>
+          <p class="text-subtitle-hero">Transform your startup ideas into compelling, investor-ready pitch decks with the power of AI</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">10K+</span>
+              <span class="stat-label">Pitch Decks Generated</span>
+            </div>
+            <div class="stat-divider">•</div>
+            <div class="stat-item">
+              <span class="stat-number">95%</span>
+              <span class="stat-label">Success Rate</span>
+            </div>
+            <div class="stat-divider">•</div>
+            <div class="stat-item">
+              <span class="stat-number">5 Min</span>
+              <span class="stat-label">Average Time</span>
+            </div>
           </div>
+        </div>
 
-        <div class="text-center">
-          <button class="btn btn-success px-4" [disabled]="!ideaForm.form.valid">
-            🚀 Generate Pitch Deck
-          </button>
+        <div class="idea-form-container glass-card">
+          <div class="form-header">
+            <h3 class="form-title">💡 Share Your Vision</h3>
+            <p class="form-description">Describe your startup idea and watch it transform into a professional pitch deck</p>
+          </div>
+          
+          <form (ngSubmit)="submitIdea()" #ideaForm="ngForm" class="idea-form">
+            <div class="form-group-enhanced">
+              <div class="input-wrapper">
+                <div class="textarea-container">
+                  <textarea
+                    id="startupIdea"
+                    class="form-control form-control-professional"
+                    [(ngModel)]="startupIdea"
+                    name="startupIdea"
+                    rows="6"
+                    required
+                    minlength="15"
+                    maxlength="300"
+                    #startupIdeaRef="ngModel"
+                    placeholder="e.g., An AI-powered platform that revolutionizes resume writing by analyzing job descriptions and creating tailored resumes in minutes, helping job seekers increase their interview success rate by 70%..."
+                    [class.is-invalid]="startupIdeaRef.invalid && startupIdeaRef.touched"
+                    [class.loading-shimmer]="false"
+                  ></textarea>
+                  <div class="character-counter">
+                    <div class="counter-wrapper">
+                      <span class="counter-text" [class.text-danger]="startupIdea.length > 300">
+                        {{ startupIdea.length }}/300
+                      </span>
+                      <div class="counter-bar">
+                        <div class="counter-progress" [style.width.%]="(startupIdea.length / 300) * 100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- AI Suggestions -->
+                <div class="ai-suggestions" *ngIf="!startupIdea || startupIdea.length < 10">
+                  <div class="suggestion-header">
+                    <span class="suggestion-icon">✨</span>
+                    <span class="suggestion-text">Need inspiration? Try these:</span>
+                  </div>
+                  <div class="suggestions-list">
+                    <button type="button" class="suggestion-chip" (click)="fillSuggestion('An AI-powered fitness app that creates personalized workout plans based on biometric data and user preferences')">
+                      🏋️ AI Fitness Coach
+                    </button>
+                    <button type="button" class="suggestion-chip" (click)="fillSuggestion('A sustainable fashion marketplace connecting eco-conscious consumers with verified sustainable brands')">
+                      🌱 Eco Fashion Hub
+                    </button>
+                    <button type="button" class="suggestion-chip" (click)="fillSuggestion('A blockchain-based supply chain platform ensuring transparency and authenticity in food production')">
+                      🔗 Food Traceability
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enhanced Validation Feedback -->
+              <div *ngIf="startupIdeaRef.invalid && startupIdeaRef.touched" class="validation-feedback">
+                <div class="validation-item" *ngIf="startupIdeaRef.errors?.['required']">
+                  <i class="validation-icon">⚠️</i>
+                  <span>Please share your startup idea with us</span>
+                </div>
+                <div class="validation-item" *ngIf="startupIdeaRef.errors?.['minlength']">
+                  <i class="validation-icon">💡</i>
+                  <span>Tell us more! Minimum 15 characters required for better insights</span>
+                </div>
+                <div class="validation-item" *ngIf="startupIdeaRef.errors?.['maxlength']">
+                  <i class="validation-icon">✂️</i>
+                  <span>Keep it concise! Maximum 300 characters for optimal processing</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <!-- Editing indicator -->
+              <div class="editing-indicator" *ngIf="startupIdea && startupIdea.length > 0">
+                <span class="indicator-icon">✏️</span>
+                <span class="indicator-text">Editing your previous idea</span>
+                <button type="button" class="clear-btn" (click)="clearIdea()" title="Start fresh">
+                  <span class="clear-icon">🗑️</span>
+                  Clear
+                </button>
+              </div>
+              
+              <button 
+                type="submit" 
+                class="btn btn-premium btn-generate" 
+                [disabled]="!ideaForm.form.valid"
+              >
+                <span class="btn-icon">🚀</span>
+                <span class="btn-text">{{ startupIdea && startupIdea.length > 0 ? 'Update Pitch Deck' : 'Generate Professional Pitch Deck' }}</span>
+                <span class="btn-loader" *ngIf="false">
+                  <span class="spinner-dots"></span>
+                </span>
+              </button>
+              
+              <div class="form-footer-info">
+                <div class="info-item tooltip-professional" data-tooltip="Powered by advanced AI algorithms">
+                  <span class="info-icon">🤖</span>
+                  <span class="info-text">AI-Powered Analysis</span>
+                </div>
+                <div class="info-item tooltip-professional" data-tooltip="Professional templates used by successful startups">
+                  <span class="info-icon">📊</span>
+                  <span class="info-text">Investor-Ready Templates</span>
+                </div>
+                <div class="info-item tooltip-professional" data-tooltip="Generated in under 30 seconds">
+                  <span class="info-icon">⚡</span>
+                  <span class="info-text">Lightning Fast</span>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
+
+        <!-- Features Section -->
+        <div class="features-preview">
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <h6>Market Analysis</h6>
+                <p>Comprehensive market research and competitive analysis</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-item">
+                <div class="feature-icon">💰</div>
+                <h6>Financial Projections</h6>
+                <p>Detailed revenue models and funding requirements</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <h6>Professional Design</h6>
+                <p>Investor-ready slides with compelling storytelling</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

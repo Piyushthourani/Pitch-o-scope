@@ -1,0 +1,32 @@
+.navbar-professional {
+  background: var(--gradient-primary) !important;
+  padding: 15px 0;
+  box-shadow: var(--shadow-medium);
+  backdrop-filter: blur(10px);
+}
+
+.brand-enhanced {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light) !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.brand-enhanced:hover {
+  color: var(--accent-gold) !important;
+  transform: scale(1.05);
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.brand-text {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 1px;
+}

@@ -1,8 +1,137 @@
-.card {
-  transition: transform 0.2s ease;
+.slide-card {
+  height: 100%;
+  transition: all 0.4s ease;
   width: 100%;
   word-wrap: break-word;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(26, 35, 126, 0.1);
 }
-.card:hover {
-  transform: translateY(-5px);
+
+.slide-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(26, 35, 126, 0.2);
+}
+
+.card-header-custom {
+  background: var(--gradient-primary);
+  padding: 15px 20px;
+  border-bottom: none;
+  position: relative;
+}
+
+.slide-number {
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card-header-custom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gold);
+}
+
+.card-body {
+  padding: 25px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+}
+
+.card-title-professional {
+  color: var(--midnight-blue);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.slide-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slide-point {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: slideInUp 0.6s ease forwards;
+}
+
+.slide-point:nth-child(1) { animation-delay: 0.1s; }
+.slide-point:nth-child(2) { animation-delay: 0.2s; }
+.slide-point:nth-child(3) { animation-delay: 0.3s; }
+.slide-point:nth-child(4) { animation-delay: 0.4s; }
+.slide-point:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.point-marker {
+  color: var(--midnight-blue);
+  font-weight: 900;
+  font-size: 1.2rem;
+  margin-right: 12px;
+  margin-top: 2px;
+  min-width: 8px;
+}
+
+.point-text {
+  color: #444;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.card-footer-custom {
+  padding: 0;
+  background: none;
+  border: none;
+  height: 4px;
+  overflow: hidden;
+}
+
+.slide-indicator {
+  height: 100%;
+  background: linear-gradient(90deg, var(--midnight-blue) 0%, var(--accent-gold) 100%);
+  animation: slideProgress 2s ease-in-out infinite;
+}
+
+@keyframes slideProgress {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title-professional {
+    font-size: 1.1rem;
+  }
+  
+  .point-text {
+    font-size: 0.9rem;
+  }
 }

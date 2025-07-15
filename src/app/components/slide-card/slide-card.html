@@ -1,8 +1,19 @@
-<div class="card h-100 shadow-sm">
+<div class="card card-professional slide-card">
+  <div class="card-header-custom">
+    <div class="slide-number">{{ slideIndex + 1 }}</div>
+  </div>
   <div class="card-body">
-    <h5 class="card-title">{{ slide.title }}</h5>
-    <ul class="card-text">
-      <li *ngFor="let point of slide.content">{{ point }}</li>
-    </ul>
+    <h5 class="card-title-professional">{{ slide.title }}</h5>
+    <div class="card-content">
+      <ul class="slide-points">
+        <li *ngFor="let point of slide.content" class="slide-point">
+          <span class="point-marker">•</span>
+          <span class="point-text">{{ point }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-footer-custom">
+    <div class="slide-indicator"></div>
   </div>
 </div>
