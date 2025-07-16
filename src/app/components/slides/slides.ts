@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Idea } from '../../services/idea';
-import { Slide } from '../../services/slide';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SlideCard } from '../slide-card/slide-card';
 import { Toast } from 'bootstrap';
+import { Slide } from '../../services/slide';
 
 @Component({
   selector: 'app-slides',
@@ -73,7 +74,17 @@ export class Slides implements OnInit {
 
     const contentLines = lines.filter(line =>
       !line.includes('Slide') && !line.startsWith('Title:')
-    ).map(line => line.replace(/\*\*/g, '').replace(/^[-•*]\s?/, '').trim());
+    ).map(line => line.replace(/\*\*/g, '').replace(/^[-•*]\s?/, '').trim())
+    .filter(line => {
+      // Filter out empty lines, single bullets, dashes, or meaningless content
+      return line.length > 0 && 
+             line !== '•' && 
+             line !== '-' && 
+             line !== '--' && 
+             line !== '*' && 
+             line !== '...' &&
+             line.length > 2; // Require at least 3 characters for meaningful content
+    });
 
     // ✅ Don't skip slides unless they're clearly empty
     if (contentLines.length === 0) continue;
